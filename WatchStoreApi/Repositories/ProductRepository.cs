@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using WatchStoreApi.Data;
+using WatchStoreApi.Dtos;
 using WatchStoreApi.Models;
 
 namespace WatchStoreApi.Repositories;
@@ -28,22 +29,52 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product> GetItem(int id)
     {
-        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
-        if (product == null)
-        {
-           // return NotFound();
-        }
-
+        var product = await _dbContext.Products.FindAsync(id);
         return product;
     }
 
     public async Task<ProductCategory> GetCategory(int id)
     {
-        var category = await _dbContext.ProductCategories.FirstOrDefaultAsync(x => x.Id == id);
-        if (category == null)
-        {
-            // return NotFound();
-        }
+        var category = await _dbContext.ProductCategories.SingleOrDefaultAsync(x => x.Id == id);
         return category;
+    }
+
+    public async Task<Product> CreateProduct(Product product)
+    {
+        await _dbContext.Products.AddAsync(product);
+        await _dbContext.SaveChangesAsync();
+        return product;
+    }
+
+    public async Task<Product> DeleteProduct(int id)
+    {
+        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        if (product == null)
+        {
+            return null;
+        }
+
+        _dbContext.Products.Remove(product);
+        await _dbContext.SaveChangesAsync();
+        return product;
+    }
+
+    public async Task<Product> UpdateProduct(int id, Product productUpdate)
+    {
+        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        if (product == null)
+        {
+            return null;
+        }
+
+        product.Name = productUpdate.Name;
+        product.Description = productUpdate.Description;
+        product.Price = productUpdate.Price;
+        product.Image = productUpdate.Image;
+        product.Quantity = productUpdate.Quantity;
+        product.CategoryId = productUpdate.CategoryId;
+        
+        await _dbContext.SaveChangesAsync();
+        return product;
     }
 }
