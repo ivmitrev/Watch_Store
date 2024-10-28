@@ -69,7 +69,7 @@ public class ProductController : ControllerBase
     
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult<Product>> DeleteProduct([FromRoute] int id)
+    public async Task<ActionResult<ProductDto>> DeleteProduct([FromRoute] int id)
     {
         var productRemoved = await _productRepository.DeleteProduct(id);
         if (productRemoved == null)
@@ -83,7 +83,7 @@ public class ProductController : ControllerBase
     
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<Product>> UpdateProduct([FromRoute] int id, [FromBody] ProductUpdateDto productUpdateDto)
+    public async Task<ActionResult<ProductDto>> UpdateProduct([FromRoute] int id, [FromBody] ProductUpdateDto productUpdateDto)
     {
         var product = await _productRepository.UpdateProduct(id,productUpdateDto.ToProductFromUpdate());
         if (product == null)

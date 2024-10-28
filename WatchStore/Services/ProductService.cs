@@ -11,8 +11,7 @@ public class ProductService : IProductService
     {
         this.httpClient = httpClient;
     }
-    
-    
+
     public async Task<IEnumerable<ProductDto>> GetProducts()
     {
         var products = await this.httpClient.GetFromJsonAsync<IEnumerable<ProductDto>>("api/Product");

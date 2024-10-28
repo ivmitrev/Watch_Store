@@ -1,0 +1,62 @@
+﻿@page "/"
+@using System.Globalization
+@using WatchStore.Services
+@inject IProductService _iproductService
+<h3>Rolex Watches</h3>
+
+@if (products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    rolex = products.Where(x => x.CategoryId == 1);
+    var rolexCount = rolex.Count(); 
+    @if (rolexCount > 0)
+    {
+        const int watchesPerRow = 3;
+        var rolexRowList = new List<ProductDto>();
+        
+        <div class="container" style="display: flex;flex-direction:column;justify-content: center;align-items: center;height: 100%;width: 100%">
+            
+        
+        @for (int i = 0; i < rolexCount; i++)
+        {
+            // Pagination
+            rolexRowList = rolex.Skip(i * watchesPerRow).Take(watchesPerRow).ToList();
+            
+            <div class="row mt-3 md-3" style="display:flex;gap: 15px;justify-content: center;width: 100%">
+                @foreach (var watch in rolexRowList)
+                {   
+                    <div class=""  style="display:flex;border:4px solid black; height: auto;width: 33%;gap: 15px">
+                            <div style="display: flex;width: 100%;flex-direction:row;align-items: center;justify-content: space-between;" class="">
+                                <div class="" style="" >
+                                    <p class="">
+                                        @watch.Name
+                                    </p>
+                                    <b><p>@watch.Price.ToString("N0", new System.Globalization.CultureInfo("bg-BG")) BGN</p></b>
+                                </div>
+                                <div style="">
+                                    <img class="" width="170px" height="251px" src="@watch.Image">
+                                </div>
+                            </div>
+                    </div>
+                }
+            </div>
+        }
+        </div>
+    }
+
+}
+
+
+@code 
+{
+    private IEnumerable<ProductDto> products;
+    private IEnumerable<ProductDto> rolex;
+    protected override async Task OnInitializedAsync()
+    {
+        products = await _iproductService.GetProducts();
+        
+    }
+}

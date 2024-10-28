@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using WatchStore.Services;
 
 namespace WatchStore;
 
@@ -12,6 +13,7 @@ public class Program
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7056/") });
+        builder.Services.AddScoped<IProductService, ProductService>();
         await builder.Build().RunAsync();
     }  
 }

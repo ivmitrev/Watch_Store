@@ -1,7 +1,7 @@
 ﻿using WatchStoreApi.Models;
 
 namespace WatchStoreApi.Repositories;
-
+    
 public interface IProductRepository
 {
     Task<IEnumerable<Product>> GetProducts();

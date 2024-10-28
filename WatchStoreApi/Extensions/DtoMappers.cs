@@ -18,7 +18,7 @@ public static class DtoMappers
                 Price = product.Price,
                 Image = product.Image,
                 Quantity = product.Quantity,
-                CategoryId = product.Id,
+                CategoryId = product.CategoryId,
                 CategoryName = category.Name
             }).ToList();
     }
@@ -33,7 +33,7 @@ public static class DtoMappers
             Price = product.Price,
             Image = product.Image,
             Quantity = product.Quantity,
-            CategoryId = product.Id,
+            CategoryId = product.CategoryId,
             CategoryName = category.Name
         };
     }

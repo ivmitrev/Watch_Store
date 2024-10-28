@@ -1,5 +1,29 @@
-﻿<h3>Product</h3>
+﻿@using WatchStore.Services
+@inject IProductService _iproductService
+<h3>Products</h3>
 
-@code {
-    
+@if (products == null)
+{
+<p>Loading...</p>
+}   
+else
+{
+@foreach (var product in products)
+{
+<p>@product.Name</p>
+<p>@product.Description</p>
+<p>@product.Price</p>
+<p>@product.Quantity</p>
+<p>@product.CategoryName</p>
+}
+}
+
+
+@code 
+{
+    private IEnumerable<ProductDto> products;
+    protected override async Task OnInitializedAsync()
+    {
+        products = await _iproductService.GetProducts();
+    }
 }

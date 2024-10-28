@@ -51,7 +51,7 @@ public class ProductRepository : IProductRepository
         var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
         if (product == null)
         {
-            return null;
+            return product;
         }
 
         _dbContext.Products.Remove(product);
@@ -61,10 +61,10 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product> UpdateProduct(int id, Product productUpdate)
     {
-        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        var product = await _dbContext.Products.FindAsync(id);
         if (product == null)
         {
-            return null;
+            return product;
         }
 
         product.Name = productUpdate.Name;
