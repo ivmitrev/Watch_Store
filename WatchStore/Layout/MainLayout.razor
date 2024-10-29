@@ -3,14 +3,58 @@
     <!--  <div class="sidebar">
         <NavMenu/> 
      </div>-->
-
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+
+        <style>
+            .top-row a
+            {
+                text-decoration: none;
+                transition: color 0.4s ease;
+                color: white;
+            }
+            .top-row a:hover
+            {
+                color: lightgreen;
+            }
+
+            img
+            {
+                transition: all 300ms ease-out;
+            }
+            img:hover
+            {
+                transition: all 300ms ease-in;
+                transform: scale(1.1);
+            }
+            
+        </style>
+        
+        <div class="top-row px-4" style="color:white;background-color:seagreen;display: flex;justify-content: space-between; align-items: center">
+            <div class="Home" >
+                <a href="/">Home</a>
+            </div>
+            <div class="st" style="display:flex;gap: 15px;margin: auto;justify-content: center;align-items: center">
+                <a href="/rolex">Rolex</a>
+                <a href="/omega">Omega</a>
+                <a href="/patek">Patek Philippe</a>
+                <a href="/hublot">Hublot</a>
+                <a href="/tissot">Tissot</a>
+                <a href="/breitling">Breitling</a>
+            </div>
+            
+            <div>
+                <img  width="30px" height="30px" src="Images/iconCart.png" alt="">
+            </div>
         </div>
+       
 
         <article class="content px-4">
             @Body
+
         </article>
+
+        <footer>
+            <h1>FOOTER</h1>
+        </footer>
     </main>
 </div>

@@ -1,4 +1,4 @@
-﻿@page "/home"
+﻿@page "/"
 @using WatchStore.Services
 @using WatchStoreApi.Dtos
 @inject IProductService _iproductService
@@ -12,14 +12,7 @@
 }
 else
 {
-@foreach (var product in products)
-    {
-        <p>@product.Name</p>
-        <p>@product.Description</p>
-        <p>@product.Price</p>
-        <p>@product.Quantity</p>
-        <p>@product.CategoryName</p>
-    }
+    
 }
 
 @code
@@ -30,5 +23,5 @@ else
     {
         products = await _iproductService.GetProducts();
     }
-};
+}
 
