@@ -136,6 +136,138 @@ public class WatchStoreDbContext : DbContext
                 CategoryId = 1
             }
         );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 12,
+                Name = "Unico Yellow Magic 44",
+                Description = "Big Bang, 44 mm, Polished Yellow Ceramic, Rubber Strap",
+                Price = 61600,
+                Image = "/Images/Hublot/hublot12.png",
+                Quantity = 4,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 13,
+                Name = "Chronograph Black Magic 42",
+                Description = "Classic Fusion, 42 mm, Polished Black Ceramic, Rubber Strap",
+                Price = 25600,
+                Image = "/Images/Hublot/hublot1.png",
+                Quantity = 8,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 14,
+                Name = "Original Steel Ceramic 44",
+                Description = "Big Band, 44 mm, Stainless Steel, Black Rubber Strap",
+                Price = 30400,
+                Image = "/Images/Hublot/hublot2.png",
+                Quantity = 2,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 15,
+                Name = "Unico Ice Bang 42",
+                Description = "Big Bang, 42 mm, Microblasted Black Ceramic, Black Fabric and Black Ceramic Buckle",
+                Price = 50000,
+                Image = "/Images/Hublot/hublot3.png",
+                Quantity = 11,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 16,
+                Name = "Tourbillon Sorai 42",
+                Description = "Tourbillon, 42 mm, Satin-finished and Polished Titanium, Sapphire with Anti-reflective Treatment",
+                Price = 230000,
+                Image = "/Images/Hublot/hublot4.png",
+                Quantity = 1,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 17,
+                Name = "Integrated Time Only Titanium 38",
+                Description = "Big Bang, 38 mm, Microblasted Black Ceramic, Black ceramic and Black Titane Deployant Buckle",
+                Price = 27200,
+                Image = "/Images/Hublot/hublot5.png",
+                Quantity = 4,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 18,
+                Name = "Big Bang Steel Blue 44",
+                Description = "Big Bang, 44 mm, Polished and Satin-finished Stainless Steel, Blue Straps",
+                Price = 28200,
+                Image = "/Images/Hublot/hublot6.png",
+                Quantity = 3,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 19,
+                Name = "Big Bang Gold Blue 44",
+                Description = "Big Bang, 44 mm, Polished and Satin-finished 18k 5N Gold, Blue Straps",
+                Price = 75200,
+                Image = "/Images/Hublot/hublot7.png",
+                Quantity = 7,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 20,
+                Name = "Classic Fusion 42",
+                Description = "Racing Grey Chronograph Titanium, 42 mm, Satin-finished Titanium, Gray Straps",
+                Price = 23400,
+                Image = "/Images/Hublot/hublot8.png",
+                Quantity = 11,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 21,
+                Name = "Classic Fusion Gold 38",
+                Description = "Original Yellow Gold, 38 mm, Black Straps",
+                Price = 44600,
+                Image = "/Images/Hublot/hublot9.png",
+                Quantity = 2,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 22,
+                Name = "Classic Fusion Green 42",
+                Description = "Chronograph Titanium Green, 42 mm, Satin-finished Titanium, Green Straps",
+                Price = 22000,
+                Image = "/Images/Hublot/hublot10.png",
+                Quantity = 8,
+                CategoryId = 2
+            }
+        );
+        modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 23,
+                Name = "Unico Ceramic Loon 42",
+                Description = "Square Bang Gold, 42 mm, Black Straps",
+                Price = 66000,
+                Image = "/Images/Hublot/hublot11.png",
+                Quantity = 5,
+                CategoryId = 2
+            }
+        );
         modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory()
             {
                 Id = 1,
