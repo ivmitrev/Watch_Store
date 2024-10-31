@@ -1,0 +1,61 @@
+﻿@using System.Security.Cryptography
+@using WatchStore.Services
+@inject IProductService _iproductService
+@page "/WatchPageDescription/{Id:int}"
+
+@if (watch == null)
+{
+    <h3>Loading watch description...</h3>
+}
+else
+{
+    @if (watch == null)
+    {
+        <h3>Loading watch description...</h3>
+    }
+    else
+    {
+        <div style="height: 90vh; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 20px; height: 100%;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;padding-left: 3rem">
+                    <b>
+                        <p style="font-size: 24px; color: #212121; margin: 0;">
+                            @watch.Name
+                        </p>
+                    </b>
+                    <p style="font-size: 16px; color: #212121;margin-top: 0;">
+                        @watch.Description
+                    </p>
+                    <p style="font-size: 18px; color: #212121;">
+                        @watch.Price.ToString("N0", new System.Globalization.CultureInfo("bg-BG")) BGN
+                    </p>
+
+                    <button class="btn btn-success">Add to Cart</button>
+                </div>
+                
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <img style="max-width: 100%; max-height: 80vh; object-fit: contain;" src="@watch.Image" alt="Watch image">
+                </div>
+
+               
+                <div style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consectetur corporis deleniti deserunt dolorem dolorum ea eligendi error est incidunt ipsam magni maiores natus quas qui quibusdam quos recusandae repellendus, reprehenderit similique soluta temporibus, vel, vitae voluptas voluptate. Accusamus, aut?</p>
+                </div>
+            </div>
+        </div>   
+    }
+
+}
+
+@code 
+{
+    [Parameter] public int Id { get; set; }
+    private ProductDto watch;
+    protected  override async Task OnInitializedAsync()
+    { 
+        watch = await _iproductService.GetProduct(Id);
+    }
+    
+    //todo ako imam url/id= 1999 da dade greshka
+    //todo puce css loader
+}
