@@ -63,6 +63,63 @@ public static class DtoMappers
             CategoryId = product.CategoryId
         };
     }
+    
+    // ---------------------
+
+    public static CartItemDto FromCartItemToCartItemDto(this CartItem cartItem, Product product)
+    {
+
+        return new CartItemDto()
+        {
+            Id = cartItem.Id,
+            ProductId = cartItem.ProductId,
+            Quantity = cartItem.Quantity,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            Image = product.Image,
+            TotalPrice = cartItem.Quantity * product.Price
+        };
+    }
+    
+    public static IEnumerable<CartItemDto> FromCartItemToCartItemDtos(this IEnumerable<CartItem> cartItems, IEnumerable<Product> products)
+    {
+        return (from cartItem in cartItems
+            join product in products
+                on cartItem.ProductId equals product.Id
+            select new CartItemDto()
+            {
+                Id = cartItem.Id,
+                ProductId = cartItem.ProductId,
+                Quantity = cartItem.Quantity,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Image = product.Image,
+                TotalPrice = cartItem.Quantity * product.Price
+            }).ToList();
+    }
+    
+    
+    public static CartItem FromCartItemToAddDtoToCartItem(this CartItemToAddDto cartItemToAddDto)
+    {
+        return new CartItem()
+        {
+            ProductId = cartItemToAddDto.ProductId,
+            Quantity = cartItemToAddDto.Quantity,
+        };
+    }
+    
+    public static CartItem FromCartItemQuantityUpdateDtoToCartItem(this CartItemQuantityUpdateDto cartItemQuantityUpdateDto)
+    {
+        return new CartItem()
+        {
+            ProductId = cartItemQuantityUpdateDto.ProductId,
+            Quantity = cartItemQuantityUpdateDto.Quantity,
+        };
+    }
+    
+
 
 }
 

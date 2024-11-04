@@ -1,6 +1,6 @@
 ﻿namespace WatchStoreApi.Dtos;
 
-public class CartProductQuantityUpdateDto
+public class CartItemToAddDto
 {
     public int ProductId { get; set; }
     public int Quantity { get; set; }

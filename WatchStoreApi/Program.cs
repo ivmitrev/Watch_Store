@@ -26,7 +26,8 @@ builder.Services.AddDbContextPool<WatchStoreDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString"))
     );
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
