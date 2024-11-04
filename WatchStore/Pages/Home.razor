@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using WatchStore.Services
 @using WatchStoreApi.Dtos
+@using WatchStore.Components
 @inject IProductService _iproductService
 <PageTitle>Home</PageTitle>
 
@@ -9,10 +10,11 @@
 @if (products == null)
 {
     <p>Loading...</p>
+   
 }
 else
 {
-    
+   
 }
 
 @code

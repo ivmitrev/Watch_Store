@@ -6,15 +6,34 @@ var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+// using for production 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy  =>
         {
-            policy.WithOrigins("https://localhost:7252"
-                ,"https://localhost:7056");
+            policy.WithOrigins("https://localhost:7252", "https://localhost:7056")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
         });
 });  
+
+
+
+// using for development and testing
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
+
+
+
 
 
 // Add services to the container.
@@ -32,7 +51,9 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+
 app.UseCors(MyAllowSpecificOrigins);
+//app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

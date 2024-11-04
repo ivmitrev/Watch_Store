@@ -14,6 +14,7 @@ public class Program
 
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7056/") });
         builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<ICartItemService, CartItemService>();
         await builder.Build().RunAsync();
     }  
 }

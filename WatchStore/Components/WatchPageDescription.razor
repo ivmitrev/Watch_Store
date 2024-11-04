@@ -1,6 +1,8 @@
 ﻿@using System.Security.Cryptography
 @using WatchStore.Services
 @inject IProductService _iproductService
+@inject ICartItemService _icartItemService
+@inject NavigationManager NavigationManager
 @page "/WatchPageDescription/{Id:int}"
 
 @if (watch == null)
@@ -11,7 +13,7 @@ else
 {
     @if (watch == null)
     {
-        <h3>Loading watch description...</h3>
+        <LoadingIcon />
     }
     else
     {
@@ -29,8 +31,14 @@ else
                     <p style="font-size: 18px; color: #212121;">
                         @watch.Price.ToString("N0", new System.Globalization.CultureInfo("bg-BG")) BGN
                     </p>
-
-                    <button class="btn btn-success">Add to Cart</button>
+                    @if (watch.Quantity == 0)
+                    {
+                        <p class="text text-danger">Out of stock</p>
+                    }
+                    else
+                    {
+                        <button onclick="@AddToCart"class="btn btn-success">Add to Cart</button>
+                    }
                 </div>
                 
                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -51,11 +59,19 @@ else
 {
     [Parameter] public int Id { get; set; }
     private ProductDto watch;
+    
     protected  override async Task OnInitializedAsync()
     { 
         watch = await _iproductService.GetProduct(Id);
     }
     
-    //todo ako imam url/id= 1999 da dade greshka
-    //todo puce css loader
+    protected async Task AddToCart()
+    {
+        await _icartItemService.AddCartItem(new CartItemToAddDto()
+        {
+            ProductId = watch.Id,
+            Quantity = 1
+        });
+        NavigationManager.NavigateTo("/Cart");
+    }
 }
