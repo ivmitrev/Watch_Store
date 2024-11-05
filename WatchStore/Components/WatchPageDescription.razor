@@ -37,7 +37,16 @@ else
                     }
                     else
                     {
-                        <button onclick="@AddToCart"class="btn btn-success">Add to Cart</button>
+                        @if (!flagForAddedProductToCart)
+                        {
+                            <button onclick="@AddToCart"class="btn btn-success">Add to Cart</button>
+                            <b><p class="text text-danger">(In stock: @watch.Quantity)</p></b>
+                        }
+                        else
+                        {
+                            <p class="text-danger">Watch is already added to Cart</p>
+                        }
+
                     }
                 </div>
                 
@@ -59,10 +68,19 @@ else
 {
     [Parameter] public int Id { get; set; }
     private ProductDto watch;
+    bool flagForAddedProductToCart = false;
+    private IEnumerable<CartItemDto> cartItems;
     
     protected  override async Task OnInitializedAsync()
     { 
         watch = await _iproductService.GetProduct(Id);
+        // !!!!!!!!!!!!!!!!!!!
+        // moje da napravq getcartitem(by product id)
+        cartItems = await _icartItemService.GetCartItems();
+        if (cartItems.Any(x => x.ProductId == Id))
+        {
+            flagForAddedProductToCart = true;
+        }
     }
     
     protected async Task AddToCart()

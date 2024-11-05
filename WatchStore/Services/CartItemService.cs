@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using WatchStoreApi.Dtos;
 
 namespace WatchStore.Services;
@@ -110,12 +112,24 @@ public class CartItemService : ICartItemService
             throw;
         }
     }
-
-    public Task<CartItemDto> UpdateCartItemQuantity(int id, CartItemQuantityUpdateDto cartItemQuantityUpdateDto)
+    
+    public async Task<CartItemDto> UpdateCartItemQuantity(int id, CartItemQuantityUpdateDto cartItemQuantityUpdateDto)
     {
-
-        return null;
-
-
+        try
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(cartItemQuantityUpdateDto), Encoding.UTF8,
+                "application/json-patch+json");
+            var response = await this._httpClient.PatchAsync($"api/CartItem/{id}", jsonContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<CartItemDto>();
+            }
+            return null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
     }
 }

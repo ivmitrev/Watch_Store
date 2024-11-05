@@ -21,7 +21,7 @@ public class CartRepository : ICartRepository
     }
     public async Task<CartItem> AddCartItem(CartItem cartItem)
     {
-        if (await CartItemIsAlreadyAdded(cartItem.Id) == false)
+        if (await CartItemIsAlreadyAdded(cartItem.ProductId) == false)
         {
             if (cartItem == null)
             {

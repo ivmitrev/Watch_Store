@@ -114,7 +114,7 @@ public class CartItemController : ControllerBase
         
     }
     
-    [HttpPut]
+    [HttpPatch]
     [Route("{id:int}")]
     public async Task<ActionResult<CartItemDto>> UpdateCartItemQuantity([FromRoute] int id,[FromBody] CartItemQuantityUpdateDto cartItemQuantityUpdateDto)
     {
