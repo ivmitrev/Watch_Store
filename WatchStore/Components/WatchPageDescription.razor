@@ -40,7 +40,7 @@ else
                         @if (!flagForAddedProductToCart)
                         {
                             <button onclick="@AddToCart"class="btn btn-success">Add to Cart</button>
-                            <b><p class="text text-danger">(In stock: @watch.Quantity)</p></b>
+                            <strong><p style="margin-top:0.5rem;" class="text text-danger">In stock: @watch.Quantity</p></strong>
                         }
                         else
                         {
@@ -67,11 +67,11 @@ else
 @code 
 {
     [Parameter] public int Id { get; set; }
-    private ProductDto watch;
+    private ProductDto? watch;
     bool flagForAddedProductToCart = false;
     private IEnumerable<CartItemDto> cartItems;
     
-    protected  override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     { 
         watch = await _iproductService.GetProduct(Id);
         // !!!!!!!!!!!!!!!!!!!
@@ -83,7 +83,7 @@ else
         }
     }
     
-    protected async Task AddToCart()
+    private async Task AddToCart()
     {
         await _icartItemService.AddCartItem(new CartItemToAddDto()
         {
@@ -92,4 +92,5 @@ else
         });
         NavigationManager.NavigateTo("/Cart");
     }
+    
 }

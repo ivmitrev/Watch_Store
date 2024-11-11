@@ -30,9 +30,9 @@ else
                     </div>
                     <div style="display: flex;flex-direction: column; gap: 10px; width: 10vw;">
                         <button @onclick="@(() => DeleteCartItem(cartItem.Id))" class="btn btn-danger">Remove</button>
-                        <div style="display: flex;flex-direction: row;justify-content: center">
+                        <div style="display: flex;flex-direction: row;justify-content: center;gap: 4px">
                             <InputNumber @bind-Value="@cartItem.Quantity" class="form-control"/>
-                            <button @onclick="@(() => UpdateCartItemQuantity(cartItem))">Update</button>
+                            <button class="btn btn-primary" @onclick="@(() => UpdateCartItemQuantity(cartItem))">Update</button>
                         </div>
                     </div>
                 </div>
@@ -55,14 +55,12 @@ else
 {
     private IEnumerable<CartItemDto> cartItems;
     private IEnumerable<ProductDto> productItems;
-    //private int QuantityForCartItem { get; set; } = 1;
     protected override async Task OnInitializedAsync()
     {
         cartItems = await _iCartItemService.GetCartItems();
-      //  productItems = await _productService.GetProducts();
     }
     
-    protected async Task UpdateCartItemQuantity(CartItemDto cartItem)
+    private async Task UpdateCartItemQuantity(CartItemDto cartItem)
     {
         if (cartItem != null)
         {
@@ -90,7 +88,7 @@ else
        
     }
 
-    protected async Task DeleteCartItem(int id)
+    private async Task DeleteCartItem(int id)
     {
         await _iCartItemService.DeleteCartItem(id);
         cartItems = await _iCartItemService.GetCartItems();
