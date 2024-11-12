@@ -9,4 +9,5 @@ public interface ICartItemService
     Task<CartItemDto> AddCartItem(CartItemToAddDto cartItemToAddDto);
     Task<CartItemDto> DeleteCartItem(int id);
     Task<CartItemDto> UpdateCartItemQuantity(int id, CartItemQuantityUpdateDto cartItemQuantityUpdateDto);
+    Task<string> Checkout();    
 }

@@ -132,4 +132,31 @@ public class CartItemService : ICartItemService
             throw;
         }
     }
+
+    public async Task<string> Checkout()
+    {
+        try
+        {
+            var result = await _httpClient.PostAsJsonAsync("api/Payment/checkout",await GetCartItems());
+            if (result.IsSuccessStatusCode)
+            { 
+                if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return "";
+                }
+                var url = await result.Content.ReadAsStringAsync();
+                return url;
+            }
+            else
+            {
+                throw new Exception($"{await result.Content.ReadAsStringAsync()}");
+            }
+          
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
+    }
 }

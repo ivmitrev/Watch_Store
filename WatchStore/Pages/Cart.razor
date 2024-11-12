@@ -3,6 +3,7 @@
 @using WatchStore.Components
 @inject ICartItemService _iCartItemService
 @inject IProductService _iProductService
+@inject NavigationManager NavigationManager
 <h3>Shopping Cart</h3>
 
 @if(cartItems == null)
@@ -44,7 +45,7 @@ else
             <b>
                 <p style="font-size: 24px;">Total - @cartItems.Sum(x => x.TotalPrice).ToString("N0", new System.Globalization.CultureInfo("bg-BG")) BGN</p>
             </b>
-            <button class="btn btn-success">Proceed to Checkout</button>
+            <button @onclick="@(() => PlaceOrder())" class="btn btn-success">Proceed to Checkout</button>
         </div>
     </div>
 
@@ -93,6 +94,13 @@ else
         await _iCartItemService.DeleteCartItem(id);
         cartItems = await _iCartItemService.GetCartItems();
         StateHasChanged();
+    }
+
+    private async Task PlaceOrder()
+    {
+        string checkoutUrl = await _iCartItemService.Checkout();
+        NavigationManager.NavigateTo(checkoutUrl);
+        // TODO emptycart await _icartItemService.EmptyCart()
     }
 
 }
