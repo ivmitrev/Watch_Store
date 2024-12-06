@@ -13,7 +13,7 @@ public class PaymentController : ControllerBase
     public PaymentController()
     {
         StripeConfiguration.ApiKey =
-            "*******************************************************************************88";
+            "**************************************************************************************";
     }
 
     [HttpPost("checkout")] 
